@@ -1,0 +1,77 @@
+
+.example-container{
+    display: flex;    
+    width: auto;
+    flex-direction: column;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+.btn_space{
+    margin-top: 2rem;
+    
+}
+.link a{
+    display: flex;
+    justify-content: center;
+    text-justify: center;
+    text-decoration: none;
+    color: #3f51b5;
+}
+
+.form-container{
+    width: 350px;
+}
+.form-field{
+    display: block;
+}
+.login_border{
+    // border: 1px solid #ccc;
+    // border-radius: 1.5rem;
+    padding: 2rem;
+    background-color: #333;
+}
+.text_login_form{
+    margin-left: 2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.login_buttons{
+    display: flex;
+    flex-direction: column;
+}
+.mat-raised-button, .mat-button{
+    width: 100%;
+}
+.button_margin{
+    margin-bottom: 8px;
+}
+.input_margin{
+    padding-top: 0.3rem;
+}
+mat-form-field{
+    padding-top: 0.3rem;
+}
+.spinner{
+    display: flex;
+    justify-content: center;
+    margin-top: 5.2rem;
+    margin-bottom: 4.2rem;
+}
+.error_code{
+    text-align: center;
+    margin-top: 3rem;
+}
+.error{
+    color: #e73c53;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+/////////////////////////////MOBILE////////////////////////////////
+
+@media only screen and (max-width: 800px){
+.form-container{
+    width: auto;
+}
+}
