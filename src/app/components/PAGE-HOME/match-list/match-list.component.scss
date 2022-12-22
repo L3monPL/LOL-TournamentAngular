@@ -22,7 +22,7 @@
     column-gap: 1rem;
 }
 .team_1{
-    width: 50%;
+    width: 35%;
     // background-color: rgb(255, 255, 255);
     margin-left: 1rem;
 }
@@ -30,11 +30,18 @@
     text-align: center;
 }
 .team_2{
-    width: 50%;
+    width: 35%;
     margin-right: 1rem;
 }
 .team_2 h3{
     text-align: center;
+}
+.middle_info{
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
 }
 .users_list{
     display: flex;
@@ -57,4 +64,7 @@
 }
 .side_right{
     justify-content: end;
+}
+.create_team_txt{
+    cursor: pointer;
 }

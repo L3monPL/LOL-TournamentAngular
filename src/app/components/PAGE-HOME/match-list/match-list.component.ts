@@ -10,10 +10,13 @@ import { Match, MatchRestService } from 'src/app/services/match-rest.service';
 export class MatchListComponent implements OnInit {
 
   subMatch?: Subscription;
-  customError?: string;
-  loading = true
-
+  customErrorMatch?: string;
+  loadingMatch = true
   matchListArray?: Array<Match>
+
+  subTeam?: Subscription
+  customErrorTeam?: string
+  loadingTeam = false
 
   constructor(
     private matchRest: MatchRestService
@@ -28,26 +31,54 @@ export class MatchListComponent implements OnInit {
       next: (response) => {
           console.log(response.body)
           this.matchListArray = response.body!
+          this.loadingMatch = false;
       },
       error: (errorResponse) => {
         switch (errorResponse.status) {
           case 400:
           case 401:
           case 403:
-            this.customError = errorResponse.error;
-            this.loading = false;
+            this.customErrorMatch = errorResponse.error;
+            this.loadingMatch = false;
             break;
         
           default:
-            this.customError = 'Błąd serwera'
-            this.loading = false;
+            this.customErrorMatch = 'Błąd serwera'
+            this.loadingMatch = false;
             break;
         }
       },
       complete: () => {
-        this.loading = false;
+        this.loadingMatch = false;
       }
-    }
-  )}
+    })
+  }
+
+  createTeamToMatch(id: number){
+    this.subTeam = this.matchRest.addTeamToMatch(id).subscribe({
+      next: (response) => {
+          this.matchList()
+          this.loadingTeam = false;
+      },
+      error: (errorResponse) => {
+        switch (errorResponse.status) {
+          case 400:
+          case 401:
+          case 403:
+            this.customErrorTeam = errorResponse.error;
+            this.loadingTeam = false;
+            break;
+        
+          default:
+            this.customErrorTeam = 'Błąd serwera'
+            this.loadingTeam = false;
+            break;
+        }
+      },
+      complete: () => {
+        this.loadingTeam = false;
+      }
+    })
+  }
 
 }

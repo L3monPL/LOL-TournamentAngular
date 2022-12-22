@@ -21,7 +21,7 @@ export interface Team{
 
 export interface MatchUsers{
   id: number,
-  champion_id: number,
+  champion: Champion,
   team_id: number,
   created_at: string,
   user?: Array<MatchUser>
@@ -31,6 +31,13 @@ export interface MatchUser{
   id: number,
   username: number,
   email: number,
+  created_at: string,
+}
+
+export interface Champion{
+  id: number,
+  name: number,
+  image: number,
   created_at: string,
 }
 
@@ -48,6 +55,13 @@ export class MatchRestService {
 
   matchList():Observable<HttpResponse<Array<Match>>>{
     return this.http.get<Array<Match>>(this.PATH + '/match',{
+      observe: 'response',
+      responseType: 'json'
+    })
+  }
+
+  addTeamToMatch(matchId: number):Observable<HttpResponse<any>>{
+    return this.http.post<any>(this.PATH + `/team/create/${matchId}`,{
       observe: 'response',
       responseType: 'json'
     })

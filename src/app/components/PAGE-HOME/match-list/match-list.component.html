@@ -1,40 +1,47 @@
 <div class="card_container">
-    <div class="card" *ngFor=" let match of matchListArray">
+    <div class="card" *ngFor=" let match of matchListArray; let i = index">
         <div class="title">
             <h2>Mecz numer: {{match.id}}</h2>
         </div>
         <div class="teams_container">
-            <!------------------------------------------------------->
+            <!--------------------------MECZ ZAKOŃCZONY----------------------------->
             <div class="team_1" *ngIf="match.team_1">
                 <h3>{{match.team_1!.name}}</h3>
                 <div class="users_list">
                     <div class="user" *ngFor="let userTeam of match.team_1?.users">
-                        <img src="./../../../../assets/yasuo.png" alt="">
+                        <img src={{userTeam!.champion.image}} alt="">
                         <p>{{userTeam.user![0].username}}</p>
                     </div>
                 </div>
             </div>
-            <!------------------------------------------------------->
-            <div class="team_1" *ngIf="!match.team_1">
-                <h3>Brak Teamu 1</h3>
-                <!-- <div class="users_list">
-                    <div class="user" *ngFor="let userTeam of match.team_1?.users">
-                        <img src="./../../../../assets/yasuo.png" alt="">
-                        <p>{{userTeam.user![0].username}}</p>
-                    </div>
-                </div> -->
+            <!--------------------------MECZ ZAKOŃCZONY----------------------------->
+            <div class="middle_info" *ngIf="match.team_1">
+<!--CHANGE      <h1>{{match.result}}</h1>-->
+                <h1>0:1</h1>
             </div>
-            <!------------------------------------------------------->
-            <!------------------------------------------------------->
-            <!------------------------------------------------------->
-            <div class="team_2">
+            <!--------------------------MECZ ZAKOŃCZONY----------------------------->
+            <div class="team_2" *ngIf="match.team_2">
                 <h3>{{match.team_2!.name}}</h3>
                 <div class="users_list">
                     <div class="user side_right" *ngFor="let userTeam of match.team_2?.users">
                         <p>{{userTeam.user![0].username}}</p>
-                        <img src="./../../../../assets/yasuo.png" alt="">
+                        <img src={{userTeam!.champion.image}} alt="champion">
                     </div>
                 </div>
+            </div>
+            <!------------------------------------------------------------------>
+            <!------------------------------------------------------------------>
+            <!--------------------------MECZ DODANY----------------------------->
+            <div class="team_1" *ngIf="!match.team_1">
+                <!-- <h3>Brak Teamu 1</h3> -->
+            </div>
+            <!--------------------------MECZ DODANY----------------------------->
+            <div class="middle_info" *ngIf="!match.team_1">
+                <h2 (click)="createTeamToMatch(match.id)" class="create_team_txt">Utwórz drużyny</h2>
+            </div>
+            <!--------------------------MECZ DODANY----------------------------->
+            <div class="team_2" *ngIf="!match.team_2">
+                <!-- <h3>Brak Teamu 2</h3> -->
             </div>
             <!------------------------------------------------------->
         </div>
