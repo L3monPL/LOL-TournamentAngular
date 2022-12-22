@@ -2,6 +2,13 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+export interface User{
+  id: number,
+  username: string,
+  email: string,
+  created_at: string,
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,6 +27,16 @@ export class UserRestService {
       email:email,
       password: password,
     }, {
+      observe: 'response',
+      responseType: 'json'
+    })
+  }
+
+
+
+
+  userList():Observable<HttpResponse<Array<User>>>{
+    return this.http.get<Array<User>>(this.PATH + '/user',{
       observe: 'response',
       responseType: 'json'
     })

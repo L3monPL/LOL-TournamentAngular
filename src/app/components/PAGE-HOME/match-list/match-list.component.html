@@ -5,7 +5,7 @@
         </div>
         <div class="teams_container">
             <!--------------------------MECZ ZAKOŃCZONY----------------------------->
-            <div class="team_1" *ngIf="match.team_1">
+            <div class="team_1" *ngIf="match.status == 'Mecz zakończony'">
                 <h3>{{match.team_1!.name}}</h3>
                 <div class="users_list">
                     <div class="user" *ngFor="let userTeam of match.team_1?.users">
@@ -15,12 +15,12 @@
                 </div>
             </div>
             <!--------------------------MECZ ZAKOŃCZONY----------------------------->
-            <div class="middle_info" *ngIf="match.team_1">
+            <div class="middle_info" *ngIf="match.status == 'Mecz zakończony'">
 <!--CHANGE      <h1>{{match.result}}</h1>-->
                 <h1>0:1</h1>
             </div>
             <!--------------------------MECZ ZAKOŃCZONY----------------------------->
-            <div class="team_2" *ngIf="match.team_2">
+            <div class="team_2" *ngIf="match.status == 'Mecz zakończony'">
                 <h3>{{match.team_2!.name}}</h3>
                 <div class="users_list">
                     <div class="user side_right" *ngFor="let userTeam of match.team_2?.users">
@@ -43,7 +43,107 @@
             <div class="team_2" *ngIf="!match.team_2">
                 <!-- <h3>Brak Teamu 2</h3> -->
             </div>
-            <!------------------------------------------------------->
+            <!---------------------------------------------------------------------->
+            <!---------------------------------------------------------------------->
+            <!--------------------------TEAMY UTWORZONE----------------------------->
+            <div class="team_created" *ngIf="match.status == 'Oczekuje na dodanie graczy'">
+                <h3 *ngIf="!setRandomUsersInTeam">Wybierz graczy</h3>
+                <div class="users_list">
+                    <form *ngIf="!setRandomUsersInTeam" [formGroup]="userForm" (submit)="randomTeamFromUsers()" class="form_column_user">
+                        <div class="form_row_user">
+                            <mat-form-field appearance="outline">
+                                <!-- <mat-label>Gracz</mat-label> -->
+                                <mat-select formControlName="user1" placeholder="Gracz 1">
+                                  <mat-option *ngFor="let user of userListArray" value={{user.id}}>{{user.username}}</mat-option>
+                                </mat-select>
+                                <div *ngIf="f['user1'].touched && f['user1'].invalid" class="alert alert-danger"></div>
+                              </mat-form-field>
+                              <mat-form-field appearance="outline">
+                                <!-- <mat-label>Gracz</mat-label> -->
+                                <mat-select formControlName="user2" placeholder="Gracz 2">
+                                    <mat-option *ngFor="let user of userListArray" value={{user.id}}>{{user.username}}</mat-option>
+                                </mat-select>
+                                <div *ngIf="f['user2'].touched && f['user2'].invalid" class="alert alert-danger"></div>
+                              </mat-form-field>
+                        </div>
+                        <div class="form_row_user">
+                            <mat-form-field appearance="outline">
+                                <!-- <mat-label>Gracz</mat-label> -->
+                                <mat-select formControlName="user3" placeholder="Gracz 3">
+                                  <mat-option *ngFor="let user of userListArray" value={{user.id}}>{{user.username}}</mat-option>
+                                </mat-select>
+                                <div *ngIf="f['user3'].touched && f['user3'].invalid" class="alert alert-danger"></div>
+                              </mat-form-field>
+                              <mat-form-field appearance="outline">
+                                <!-- <mat-label>Gracz</mat-label> -->
+                                <mat-select formControlName="user4" placeholder="Gracz 4">
+                                    <mat-option *ngFor="let user of userListArray" value={{user.id}}>{{user.username}}</mat-option>
+                                </mat-select>
+                                <div *ngIf="f['user4'].touched && f['user4'].invalid" class="alert alert-danger"></div>
+                              </mat-form-field>
+                        </div>
+                        <div class="form_row_user">
+                            <mat-form-field appearance="outline">
+                                <!-- <mat-label>Gracz</mat-label> -->
+                                <mat-select formControlName="user5" placeholder="Gracz 5">
+                                  <mat-option *ngFor="let user of userListArray" value={{user.id}}>{{user.username}}</mat-option>
+                                </mat-select>
+                                <div *ngIf="f['user5'].touched && f['user5'].invalid" class="alert alert-danger"></div>
+                              </mat-form-field>
+                              <mat-form-field appearance="outline">
+                                <!-- <mat-label>Gracz</mat-label> -->
+                                <mat-select formControlName="user6" placeholder="Gracz 6">
+                                    <mat-option *ngFor="let user of userListArray" value={{user.id}}>{{user.username}}</mat-option>
+                                </mat-select>
+                                <div *ngIf="f['user6'].touched && f['user6'].invalid" class="alert alert-danger"></div>
+                              </mat-form-field>
+                        </div>
+                        <button mat-flat-button color="accent">Wylosuj teamy</button>
+                    </form>
+                </div>
+                    <!--------------------------WYLOCOWANE DRYZYNY DO AKCEPTACJI----------------------------->
+                <div class="users_list_random_team">
+                    <div *ngIf="setRandomUsersInTeam" class="current_random_teams teams_container">
+                        <div class="team_1">
+                            <h3>{{match.team_1!.name}}</h3>
+                            <div class="users_list">
+                                <div class="user" *ngFor="let randomUser of this.randomTeam1">
+                                    <!-- <img src={{userTeam!.champion.image}} alt=""> -->
+                                    <p>{{randomUser}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--------------------------MECZ ZAKOŃCZONY----------------------------->
+                        <div class="middle_info">
+            <!--CHANGE      <h1>{{match.result}}</h1>-->
+                            <h3>Zaakceptuj drużyny</h3>
+                            <h3 (click)="randomTeamFromUsers()">Losuj ponownie</h3>
+                        </div>
+                        <!--------------------------MECZ ZAKOŃCZONY----------------------------->
+                        <div class="team_2">
+                            <h3>{{match.team_2!.name}}</h3>
+                            <div class="users_list">
+                                <div class="user side_right" *ngFor="let randomUser of this.randomTeam2">
+                                    <p>{{randomUser}}</p>
+                                    <!-- <img src={{userTeam!.champion.image}} alt="champion"> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--------------------------TEAMY UTWORZONE----------------------------->
+            <!-- <div class="middle_info" *ngIf="match.status == 'Oczekuje na dodanie graczy'">
+                
+            </div> -->
+            <!--------------------------TEAMY UTWORZONE----------------------------->
+            <!-- <div class="team_2" *ngIf="match.status == 'Oczekuje na dodanie graczy'">
+                <h3>{{match.team_2!.name}}</h3>
+                <div class="users_list">
+                    
+                </div>
+            </div> -->
+            <!---------------------------------------------------------------------->
         </div>
     </div>
 </div>
