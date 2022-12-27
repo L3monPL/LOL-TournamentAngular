@@ -152,6 +152,7 @@ export class MatchListComponent implements OnInit {
     this.subTeam = this.matchRest.addTeamToMatch(id).subscribe({
       next: (response) => {
           this.matchList()
+          this.matchListInProgress()
           this.loadingTeam = false;
       },
       error: (errorResponse) => {
