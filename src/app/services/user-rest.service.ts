@@ -28,7 +28,16 @@ export class UserRestService {
       password: password,
     }, {
       observe: 'response',
-      responseType: 'json'
+      responseType: 'json',
+      withCredentials: true
+    })
+  }
+
+  currentUserAuth():Observable<HttpResponse<User>>{
+    return this.http.get<User>(this.PATH + '/user/auth/currentUser',{
+      observe: 'response',
+      responseType: 'json',
+      withCredentials: true
     })
   }
 

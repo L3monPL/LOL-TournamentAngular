@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
       this.userLogin = this.userRest.login(loginValue!, passwordValue!).subscribe({
         next: (response) => {
             this.router.navigateByUrl('/home');
-            console.log(response.body.token)
+            // console.log(response.body.token)
             localStorage.setItem('currentUser',response.body.token);
             this.getUserStart()
         },
