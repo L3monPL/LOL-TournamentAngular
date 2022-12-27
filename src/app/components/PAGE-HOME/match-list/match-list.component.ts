@@ -16,6 +16,11 @@ export class MatchListComponent implements OnInit {
   loadingMatch = true
   matchListArray?: Array<Match>
 
+  subMatchInProgress?: Subscription;
+  customErrorMatchInProgress?: string;
+  loadingMatchInProgress = true
+  matchListArrayInProgress?: Array<Match>
+
   subTeam?: Subscription
   customErrorTeam?: string
   loadingTeam = false
@@ -29,6 +34,10 @@ export class MatchListComponent implements OnInit {
   randomTeam1 = []
   randomTeam2 = []
   currentRandomUsersArr = []
+
+  subCreateMatch?: Subscription
+  customErrorCreateMatch?: string;
+  loadingCreateMatch = true
 
   userForm = new FormGroup({
     user1: new FormControl<null|User>(null,Validators.required),
@@ -47,6 +56,7 @@ export class MatchListComponent implements OnInit {
   ngOnInit(): void {
     this.matchList()
     this.userList()
+    this.matchListInProgress()
   }
 
   
@@ -79,6 +89,34 @@ export class MatchListComponent implements OnInit {
       },
       complete: () => {
         this.loadingMatch = false;
+      }
+    })
+  }
+
+  matchListInProgress(){
+    this.subMatchInProgress = this.matchRest.matchListInProgress().subscribe({
+      next: (response) => {
+          console.log(response.body)
+          this.matchListArrayInProgress = response.body!
+          this.loadingMatchInProgress = false;
+      },
+      error: (errorResponse) => {
+        switch (errorResponse.status) {
+          case 400:
+          case 401:
+          case 403:
+            this.customErrorMatchInProgress = errorResponse.error;
+            this.loadingMatchInProgress = false;
+            break;
+        
+          default:
+            this.customErrorMatchInProgress = 'Błąd serwera'
+            this.loadingMatchInProgress = false;
+            break;
+        }
+      },
+      complete: () => {
+        this.loadingMatchInProgress = false;
       }
     })
   }
@@ -181,6 +219,34 @@ export class MatchListComponent implements OnInit {
       [usersId[i], usersId[j]] = [usersId[j], usersId[i]];
     }
     return usersId
+  }
+
+  createNewMatch(){
+// ID TO CHANGE FROM CURRENT USER
+    this.subCreateMatch = this.matchRest.createMatch(1).subscribe({
+      next: (response) => {
+          this.matchListInProgress()
+          this.loadingCreateMatch = false;
+      },
+      error: (errorResponse) => {
+        switch (errorResponse.status) {
+          case 400:
+          case 401:
+          case 403:
+            this.customErrorCreateMatch = errorResponse.error;
+            this.loadingCreateMatch = false;
+            break;
+        
+          default:
+            this.customErrorCreateMatch = 'Błąd serwera'
+            this.loadingCreateMatch = false;
+            break;
+        }
+      },
+      complete: () => {
+        this.loadingCreateMatch = false;
+      }
+    })
   }
 
 }

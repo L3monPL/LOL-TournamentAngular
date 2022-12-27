@@ -54,7 +54,14 @@ export class MatchRestService {
   ) { }
 
   matchList():Observable<HttpResponse<Array<Match>>>{
-    return this.http.get<Array<Match>>(this.PATH + '/match',{
+    return this.http.get<Array<Match>>(this.PATH + '/match/end/list',{
+      observe: 'response',
+      responseType: 'json'
+    })
+  }
+
+  matchListInProgress():Observable<HttpResponse<Array<Match>>>{
+    return this.http.get<Array<Match>>(this.PATH + '/match/edit/currentMatch',{
       observe: 'response',
       responseType: 'json'
     })
@@ -62,6 +69,15 @@ export class MatchRestService {
 
   addTeamToMatch(matchId: number):Observable<HttpResponse<any>>{
     return this.http.post<any>(this.PATH + `/team/create/${matchId}`,{
+      observe: 'response',
+      responseType: 'json'
+    })
+  }
+
+  createMatch(creator_user_id: number):Observable<HttpResponse<any>>{
+    return this.http.post<any>(this.PATH + `/match/create`,{
+      creator_user_id: creator_user_id
+    },{
       observe: 'response',
       responseType: 'json'
     })
