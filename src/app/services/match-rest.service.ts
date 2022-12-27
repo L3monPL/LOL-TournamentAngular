@@ -82,4 +82,39 @@ export class MatchRestService {
       responseType: 'json'
     })
   }
+
+  setUsersToMatch(matchId: number, users_1: Array<number>, users_2: Array<number>):Observable<HttpResponse<any>>{
+    return this.http.post<any>(this.PATH + `/teamUser/setUsers/6/${matchId}`,{
+      team_1: {
+        users: users_1
+      },
+      team_2: {
+        users: users_2
+      }
+    },{
+      observe: 'response',
+      responseType: 'json'
+    })
+  }
+
+  championsList():Observable<HttpResponse<Array<Champion>>>{
+    return this.http.get<Array<Champion>>(this.PATH + '/champion',{
+      observe: 'response',
+      responseType: 'json'
+    })
+  }
+
+  postChampionToUsers(matchId: number, champions_1: Array<number>, champions_2: Array<number>):Observable<HttpResponse<any>>{
+    return this.http.post<any>(this.PATH + `/champion/updateChampionsToTeams/${matchId}`,{
+      team_1: {
+        champions: champions_1
+      },
+      team_2: {
+        champions: champions_2
+      }
+    },{
+      observe: 'response',
+      responseType: 'json'
+    })
+  }  
 }

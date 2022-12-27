@@ -8,7 +8,7 @@
         </div>
         <div class="teams_container">
             <!--------------------------MECZ ZAKOŃCZONY----------------------------->
-            <div class="team_1" *ngIf="match.status == 'Mecz zakończony'">
+            <div class="team_1" *ngIf="match.status == 'Oczekuje na podanie wyniku'">
                 <h3>{{match.team_1!.name}}</h3>
                 <div class="users_list">
                     <div class="user" *ngFor="let userTeam of match.team_1?.users">
@@ -18,12 +18,12 @@
                 </div>
             </div>
             <!--------------------------MECZ ZAKOŃCZONY----------------------------->
-            <div class="middle_info" *ngIf="match.status == 'Mecz zakończony'">
+            <div class="middle_info" *ngIf="match.status == 'Oczekuje na podanie wyniku'">
 <!--CHANGE      <h1>{{match.result}}</h1>-->
                 <h1>0:1</h1>
             </div>
             <!--------------------------MECZ ZAKOŃCZONY----------------------------->
-            <div class="team_2" *ngIf="match.status == 'Mecz zakończony'">
+            <div class="team_2" *ngIf="match.status == 'Oczekuje na podanie wyniku'">
                 <h3>{{match.team_2!.name}}</h3>
                 <div class="users_list">
                     <div class="user side_right" *ngFor="let userTeam of match.team_2?.users">
@@ -104,7 +104,7 @@
                         <button mat-flat-button color="accent">Wylosuj teamy</button>
                     </form>
                 </div>
-                    <!--------------------------WYLOCOWANE DRYZYNY DO AKCEPTACJI----------------------------->
+                    <!--------------------------WYLOSOWANE DRYZYNY DO AKCEPTACJI----------------------------->
                 <div class="users_list_random_team">
                     <div *ngIf="setRandomUsersInTeam" class="current_random_teams teams_container">
                         <div class="team_1">
@@ -116,13 +116,13 @@
                                 </div>
                             </div>
                         </div>
-                        <!--------------------------MECZ ZAKOŃCZONY----------------------------->
+                        <!--------------------------WYLOSOWANE DRYZYNY DO AKCEPTACJI----------------------------->
                         <div class="middle_info">
-            <!--CHANGE      <h1>{{match.result}}</h1>-->
-                            <h3>Zaakceptuj drużyny</h3>
+                            <!-- <h1>{{match.result}}</h1> -->
+                            <h3 (click)="addUsersTomatch(match.id)">Zaakceptuj drużyny</h3>
                             <h3 (click)="randomTeamFromUsers()">Losuj ponownie</h3>
                         </div>
-                        <!--------------------------MECZ ZAKOŃCZONY----------------------------->
+                        <!--------------------------WYLOSOWANE DRYZYNY DO AKCEPTACJI----------------------------->
                         <div class="team_2">
                             <h3>{{match.team_2!.name}}</h3>
                             <div class="users_list">
@@ -134,19 +134,88 @@
                         </div>
                     </div>
                 </div>
+                <!------------------------------------------------------------------>
             </div>
-            <!--------------------------TEAMY UTWORZONE----------------------------->
-            <!-- <div class="middle_info" *ngIf="match.status == 'Oczekuje na dodanie graczy'">
-                
-            </div> -->
-            <!--------------------------TEAMY UTWORZONE----------------------------->
-            <!-- <div class="team_2" *ngIf="match.status == 'Oczekuje na dodanie graczy'">
-                <h3>{{match.team_2!.name}}</h3>
-                <div class="users_list">
-                    
+            <!--------------------------DODAWANIE POSTACI----------------------------->
+            <form *ngIf="match.status == 'Oczekuje na dodanie postaci'" [formGroup]="championForm" class="champion_add_container">
+                <div class="team_1_champion" *ngIf="match.status == 'Oczekuje na dodanie postaci'">
+                    <h3>{{match.team_1!.name}}</h3>
+                    <div class="users_list">
+                        <div class="user">
+                            <mat-form-field appearance="outline">
+                                <mat-select formControlName="champion1" placeholder="Champion 1">
+                                    <mat-option *ngFor="let champion of championsListArray" value={{champion.id}}>{{champion.name}}</mat-option>
+                                </mat-select>
+                                <div *ngIf="f1['champion1'].touched && f1['champion1'].invalid" class="alert alert-danger"></div>
+                              </mat-form-field>
+                            <p>{{match.team_1?.users![0].user![0].username}}</p>
+                        </div>
+
+                        <div class="user">
+                            <mat-form-field appearance="outline">
+                                <mat-select formControlName="champion2" placeholder="Champion 2">
+                                    <mat-option *ngFor="let champion of championsListArray" value={{champion.id}}>{{champion.name}}</mat-option>
+                                </mat-select>
+                                <div *ngIf="f1['champion2'].touched && f1['champion2'].invalid" class="alert alert-danger"></div>
+                              </mat-form-field>
+                            <p>{{match.team_1?.users![1].user![0].username}}</p>
+                        </div>
+
+                        <div class="user">
+                            <mat-form-field appearance="outline">
+                                <mat-select formControlName="champion3" placeholder="Champion 3">
+                                    <mat-option *ngFor="let champion of championsListArray" value={{champion.id}}>{{champion.name}}</mat-option>
+                                </mat-select>
+                                <div *ngIf="f1['champion3'].touched && f1['champion3'].invalid" class="alert alert-danger"></div>
+                              </mat-form-field>
+                            <p>{{match.team_1?.users![2].user![0].username}}</p>
+                        </div>
+                    </div>
                 </div>
-            </div> -->
-            <!---------------------------------------------------------------------->
+                <!--------------------------DODAWANIE POSTACI----------------------------->
+                <!-- <div class="middle_info" *ngIf="match.status == 'Oczekuje na dodanie postaci'">
+
+                </div> -->
+                <!--------------------------DODAWANIE POSTACI----------------------------->
+                <div class="team_2_champion" *ngIf="match.status == 'Oczekuje na dodanie postaci'">
+                    <h3>{{match.team_2!.name}}</h3>
+                    <div class="users_list">
+                        <div class="user">
+                            <p>{{match.team_2?.users![0].user![0].username}}</p>
+                            <mat-form-field appearance="outline">
+                                <mat-select formControlName="champion4" placeholder="Champion 4">
+                                    <mat-option *ngFor="let champion of championsListArray" value={{champion.id}}>{{champion.name}}</mat-option>
+                                </mat-select>
+                                <div *ngIf="f1['champion4'].touched && f1['champion4'].invalid" class="alert alert-danger"></div>
+                              </mat-form-field>
+                        </div>
+
+                        <div class="user">
+                            <p>{{match.team_2?.users![1].user![0].username}}</p>
+                            <mat-form-field appearance="outline">
+                                <mat-select formControlName="champion5" placeholder="Champion 5">
+                                    <mat-option *ngFor="let champion of championsListArray" value={{champion.id}}>{{champion.name}}</mat-option>
+                                </mat-select>
+                                <div *ngIf="f1['champion5'].touched && f1['champion5'].invalid" class="alert alert-danger"></div>
+                              </mat-form-field>
+                        </div>
+
+                        <div class="user">
+                            <p>{{match.team_2?.users![2].user![0].username}}</p>
+                            <mat-form-field appearance="outline">
+                                <mat-select formControlName="champion6" placeholder="Champion 6">
+                                    <mat-option *ngFor="let champion of championsListArray" value={{champion.id}}>{{champion.name}}</mat-option>
+                                </mat-select>
+                                <div *ngIf="f1['champion6'].touched && f1['champion6'].invalid" class="alert alert-danger"></div>
+                              </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <!------------------------------------------------------------------>
+            </form>
+        </div>
+        <div *ngIf="match.status == 'Oczekuje na dodanie postaci'" class="btn_add_champions">
+            <button (click)="addChampionsToUsers(match.id)" mat-flat-button color="accent">Zatwierdź postacie</button>
         </div>
     </div>
 

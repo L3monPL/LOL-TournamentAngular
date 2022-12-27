@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Match, MatchRestService } from 'src/app/services/match-rest.service';
+import { Champion, Match, MatchRestService } from 'src/app/services/match-rest.service';
 import { User, UserRestService } from 'src/app/services/user-rest.service';
 
 @Component({
@@ -39,13 +39,35 @@ export class MatchListComponent implements OnInit {
   customErrorCreateMatch?: string;
   loadingCreateMatch = true
 
+  subAddUsersToMatch?: Subscription
+  customErrorAddUsersToMatch?: string;
+  loadingAddUsersToMatch = true
+
+  subChampions?: Subscription
+  customErrorChampions?: string;
+  loadingChampions = true
+  championsListArray?: Array<Champion>
+
+  subPostChampionsToUsers?: Subscription
+  customErrorPostChampionsToUsers?: string;
+  loadingPostChampionsToUsers = true
+
   userForm = new FormGroup({
-    user1: new FormControl<null|User>(null,Validators.required),
+    user1: new FormControl<number|null>(null,Validators.required),
     user2: new FormControl<number|null>(null,Validators.required),
     user3: new FormControl<number|null>(null,Validators.required),
     user4: new FormControl<number|null>(null,Validators.required),
     user5: new FormControl<number|null>(null,Validators.required),
     user6: new FormControl<number|null>(null,Validators.required)
+  });
+
+  championForm = new FormGroup({
+    champion1: new FormControl<number|null>(null,Validators.required),
+    champion2: new FormControl<number|null>(null,Validators.required),
+    champion3: new FormControl<number|null>(null,Validators.required),
+    champion4: new FormControl<number|null>(null,Validators.required),
+    champion5: new FormControl<number|null>(null,Validators.required),
+    champion6: new FormControl<number|null>(null,Validators.required)
   });
 
   constructor(
@@ -57,12 +79,17 @@ export class MatchListComponent implements OnInit {
     this.matchList()
     this.userList()
     this.matchListInProgress()
+    this.getChampionsList()
   }
 
   
 
   get f(){
     return this.userForm.controls;
+  }
+
+  get f1(){
+    return this.championForm.controls;
   }
 
   matchList(){
@@ -231,8 +258,8 @@ export class MatchListComponent implements OnInit {
       error: (errorResponse) => {
         switch (errorResponse.status) {
           case 400:
-          case 401:
           case 403:
+          case 405:
             this.customErrorCreateMatch = errorResponse.error;
             this.loadingCreateMatch = false;
             break;
@@ -247,6 +274,101 @@ export class MatchListComponent implements OnInit {
         this.loadingCreateMatch = false;
       }
     })
+  }
+
+  addUsersTomatch(matchId: number){
+    // setUsersToMatch
+    this.subAddUsersToMatch = this.matchRest.setUsersToMatch(matchId, this.randomTeam1, this.randomTeam2).subscribe({
+      next: (response) => {
+        this.matchListInProgress()
+          this.loadingAddUsersToMatch = false;
+      },
+      error: (errorResponse) => {
+        switch (errorResponse.status) {
+          case 400:
+          case 401:
+          case 403:
+            this.customErrorAddUsersToMatch = errorResponse.error;
+            this.loadingAddUsersToMatch = false;
+            break;
+        
+          default:
+            this.customErrorAddUsersToMatch = 'Błąd serwera'
+            this.loadingAddUsersToMatch = false;
+            break;
+        }
+      },
+      complete: () => {
+        this.loadingAddUsersToMatch = false;
+      }
+    })
+  }
+
+  getChampionsList(){
+    this.subChampions = this.matchRest.championsList().subscribe({
+      next: (response) => {
+          this.championsListArray = response.body!
+          this.loadingChampions = false;
+      },
+      error: (errorResponse) => {
+        switch (errorResponse.status) {
+          case 400:
+          case 401:
+          case 403:
+            this.customErrorChampions = errorResponse.error;
+            this.loadingChampions = false;
+            break;
+        
+          default:
+            this.customErrorChampions = 'Błąd serwera'
+            this.loadingChampions = false;
+            break;
+        }
+      },
+      complete: () => {
+        this.loadingChampions = false;
+      }
+    })
+  }
+
+  addChampionsToUsers(matchId: number){
+    let champion1 = this.championForm.get('champion1')?.value
+    let champion2 = this.championForm.get('champion2')?.value
+    let champion3 = this.championForm.get('champion3')?.value
+    let champion4 = this.championForm.get('champion4')?.value
+    let champion5 = this.championForm.get('champion5')?.value
+    let champion6 = this.championForm.get('champion6')?.value
+
+    
+    let champions_team_1 = [Number(champion1), Number(champion2), Number(champion3)]
+    let champions_team_2 = [Number(champion4), Number(champion5), Number(champion6)]
+
+    if (this.championForm.valid) {
+      this.subPostChampionsToUsers = this.matchRest.postChampionToUsers(matchId, champions_team_1, champions_team_2).subscribe({
+        next: (response) => {
+          this.matchListInProgress()
+            this.loadingPostChampionsToUsers = false;
+        },
+        error: (errorResponse) => {
+          switch (errorResponse.status) {
+            case 400:
+            case 401:
+            case 403:
+              this.customErrorPostChampionsToUsers = errorResponse.error;
+              this.loadingPostChampionsToUsers = false;
+              break;
+          
+            default:
+              this.customErrorPostChampionsToUsers = 'Błąd serwera'
+              this.loadingPostChampionsToUsers = false;
+              break;
+          }
+        },
+        complete: () => {
+          this.loadingPostChampionsToUsers = false;
+        }
+      })
+    }
   }
 
 }
