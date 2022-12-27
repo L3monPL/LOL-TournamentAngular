@@ -160,3 +160,15 @@
 .middle_info_result_buttons button{
     width: 80%;
 }
+.middle_info_users_buttons{
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2rem;
+}
+.middle_info_users_buttons button{
+    width: 100%;
+}

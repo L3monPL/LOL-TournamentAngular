@@ -111,23 +111,25 @@
                         <div class="team_1">
                             <h3>{{match.team_1!.name}}</h3>
                             <div class="users_list">
-                                <div class="user" *ngFor="let randomUser of this.randomTeam1">
+                                <div class="user" *ngFor="let randomUser of this.userListByIdTeam1">
                                     <!-- <img src={{userTeam!.champion.image}} alt=""> -->
                                     <p>{{randomUser}}</p>
                                 </div>
                             </div>
                         </div>
                         <!--------------------------WYLOSOWANE DRYZYNY DO AKCEPTACJI----------------------------->
-                        <div class="middle_info">
+                        <div class="middle_info_users_buttons">
                             <!-- <h1>{{match.result}}</h1> -->
-                            <h3 (click)="addUsersTomatch(match.id)">Zaakceptuj drużyny</h3>
-                            <h3 (click)="randomTeamFromUsers()">Losuj ponownie</h3>
+                            <!-- <h3 (click)="addUsersTomatch(match.id)">Zaakceptuj drużyny</h3>
+                            <h3 (click)="randomTeamFromUsers()">Losuj ponownie</h3> -->
+                            <button (click)="addUsersTomatch(match.id)" mat-flat-button color="accent">Zaakceptuj drużyny</button>
+                            <button (click)="randomTeamFromUsers()" mat-flat-button color="primary">Losuj ponownie</button>
                         </div>
                         <!--------------------------WYLOSOWANE DRYZYNY DO AKCEPTACJI----------------------------->
                         <div class="team_2">
                             <h3>{{match.team_2!.name}}</h3>
                             <div class="users_list">
-                                <div class="user side_right" *ngFor="let randomUser of this.randomTeam2">
+                                <div class="user side_right" *ngFor="let randomUser of this.userListByIdTeam2">
                                     <p>{{randomUser}}</p>
                                     <!-- <img src={{userTeam!.champion.image}} alt="champion"> -->
                                 </div>
