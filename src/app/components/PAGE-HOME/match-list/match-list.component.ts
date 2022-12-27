@@ -34,6 +34,8 @@ export class MatchListComponent implements OnInit {
   randomTeam1 = []
   randomTeam2 = []
   currentRandomUsersArr = []
+  userListByIdTeam1?: Array<any>
+  userListByIdTeam2?: Array<any>
 
   subCreateMatch?: Subscription
   customErrorCreateMatch?: string;
@@ -234,11 +236,26 @@ export class MatchListComponent implements OnInit {
         else{
           this.randomTeam2.push(this.currentRandomUsersArr[index])
         }
-        
       }
+
+      // for (let index = 0; index < this.userListArray!.length; index++) {
+      //   let currentUser = this.userListArray!.find(x => x.id === usersId[index])
+      //   console.log(currentUser)
+      //   if (index < this.userListArray!.length/2) {
+      //     this.userListByIdTeam1!.push(currentUser!.username)
+      //   }else{
+      //     this.userListByIdTeam2!.push(currentUser!.username)
+      //   }
+        
+      // }
+
+
       console.log(this.randomTeam1)
       console.log(this.randomTeam2)
       this.setRandomUsersInTeam = true
+
+      // console.log(this.userListByIdTeam1)
+      // console.log(this.userListByIdTeam2)
 
 
     }
