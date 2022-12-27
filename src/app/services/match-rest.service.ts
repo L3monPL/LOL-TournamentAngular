@@ -117,4 +117,13 @@ export class MatchRestService {
       responseType: 'json'
     })
   }  
+
+  putMatchResult(matchId: number, result: string):Observable<HttpResponse<any>>{
+    return this.http.put<any>(this.PATH + `/match/result/${matchId}`,{
+      result: result
+    },{
+      observe: 'response',
+      responseType: 'json'
+    })
+  }
 }

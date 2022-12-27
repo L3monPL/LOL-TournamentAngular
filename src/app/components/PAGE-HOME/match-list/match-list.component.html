@@ -7,7 +7,7 @@
             <h2>Mecz numer: {{match.id}}</h2>
         </div>
         <div class="teams_container">
-            <!--------------------------MECZ ZAKOŃCZONY----------------------------->
+            <!--------------------------OCZEKUJE NA WYNIK----------------------------->
             <div class="team_1" *ngIf="match.status == 'Oczekuje na podanie wyniku'">
                 <h3>{{match.team_1!.name}}</h3>
                 <div class="users_list">
@@ -17,12 +17,13 @@
                     </div>
                 </div>
             </div>
-            <!--------------------------MECZ ZAKOŃCZONY----------------------------->
-            <div class="middle_info" *ngIf="match.status == 'Oczekuje na podanie wyniku'">
-<!--CHANGE      <h1>{{match.result}}</h1>-->
-                <h1>0:1</h1>
+            <!--------------------------OCZEKUJE NA WYNIK----------------------------->
+            <div class="middle_info_result_buttons" *ngIf="match.status == 'Oczekuje na podanie wyniku'">
+                <h3>Wygrywa:</h3>
+                <button (click)="resultWinTeam1(match.id)" mat-flat-button color="accent">Team BLUE</button>
+                <button (click)="resultWinTeam2(match.id)" mat-flat-button color="accent">Team RED</button>
             </div>
-            <!--------------------------MECZ ZAKOŃCZONY----------------------------->
+            <!--------------------------OCZEKUJE NA WYNIK----------------------------->
             <div class="team_2" *ngIf="match.status == 'Oczekuje na podanie wyniku'">
                 <h3>{{match.team_2!.name}}</h3>
                 <div class="users_list">
@@ -265,8 +266,7 @@
             </div>
             <!--------------------------MECZ ZAKOŃCZONY----------------------------->
             <div class="middle_info" *ngIf="match.status == 'Mecz zakończony'">
-<!--CHANGE      <h1>{{match.result}}</h1>-->
-                <h1>0:1</h1>
+              <h1>{{match.result}}</h1>
             </div>
             <!--------------------------MECZ ZAKOŃCZONY----------------------------->
             <div class="team_2" *ngIf="match.status == 'Mecz zakończony'">

@@ -52,6 +52,10 @@ export class MatchListComponent implements OnInit {
   customErrorPostChampionsToUsers?: string;
   loadingPostChampionsToUsers = true
 
+  subPutMatchResult?: Subscription
+  customErrorPutMatchResult?: string;
+  loadingPutMatchResult = true
+
   userForm = new FormGroup({
     user1: new FormControl<number|null>(null,Validators.required),
     user2: new FormControl<number|null>(null,Validators.required),
@@ -370,6 +374,44 @@ export class MatchListComponent implements OnInit {
         }
       })
     }
+  }
+
+  resultWinTeam1(matchId: number){
+    let result = 'team1'
+    this.putMatchResult(matchId, result)
+  }
+
+  resultWinTeam2(matchId: number){
+    let result = 'team2'
+    this.putMatchResult(matchId, result)
+  }
+
+  putMatchResult(matchId: number, result: string){
+    this.subPutMatchResult = this.matchRest.putMatchResult(matchId, result).subscribe({
+      next: (response) => {
+        this.matchListInProgress()
+        this.matchList()
+          this.loadingPutMatchResult = false;
+      },
+      error: (errorResponse) => {
+        switch (errorResponse.status) {
+          case 400:
+          case 401:
+          case 403:
+            this.customErrorPutMatchResult = errorResponse.error;
+            this.loadingPutMatchResult = false;
+            break;
+        
+          default:
+            this.customErrorPutMatchResult = 'Błąd serwera'
+            this.loadingPutMatchResult = false;
+            break;
+        }
+      },
+      complete: () => {
+        this.loadingPutMatchResult = false;
+      }
+    })
   }
 
 }

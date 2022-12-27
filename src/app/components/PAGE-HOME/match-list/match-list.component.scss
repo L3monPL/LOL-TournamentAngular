@@ -147,3 +147,16 @@
 .btn_add_champions button{
     width: 100%;
 }
+.middle_info_result_buttons{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.middle_info_result_buttons button{
+    width: 80%;
+}
