@@ -210,6 +210,12 @@ export class MatchListComponent implements OnInit {
   }
 
   randomTeamFromUsers(){
+
+    this.randomTeam1 = []
+    this.randomTeam2 = []
+    this.userListByIdTeam1 = []
+    this.userListByIdTeam2 = []
+
     let user1 = this.userForm.get('user1')?.value
     let user2 = this.userForm.get('user2')?.value
     let user3 = this.userForm.get('user3')?.value
