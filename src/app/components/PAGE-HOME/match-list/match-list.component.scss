@@ -61,6 +61,15 @@
     align-items: center;
     margin-top: 1rem;
 }
+.middle_info_teams_create{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    // row-gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
 .users_list{
     display: flex;
     flex-direction: column;
@@ -189,3 +198,16 @@
 .font_green{
     color: #1eca58;
 }
+
+
+@media only screen and (max-width: 1600px){
+.mobile_column{
+    display: flex;
+    flex-direction: column-reverse;
+}
+.mobile_column_reverse{
+    display: flex;
+    flex-direction: column;
+}
+}
+

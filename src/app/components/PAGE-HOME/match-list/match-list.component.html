@@ -37,17 +37,17 @@
             <!------------------------------------------------------------------>
             <!------------------------------------------------------------------>
             <!--------------------------MECZ DODANY----------------------------->
-            <div class="team_1" *ngIf="!match.team_1">
-                <!-- <h3>Brak Teamu 1</h3> -->
-            </div>
+            <!-- <div class="team_1" *ngIf="!match.team_1">
+
+            </div> -->
             <!--------------------------MECZ DODANY----------------------------->
-            <div class="middle_info" *ngIf="!match.team_1">
+            <div class="middle_info_teams_create" *ngIf="!match.team_1">
                 <h2 (click)="createTeamToMatch(match.id)" class="create_team_txt">Utwórz drużyny</h2>
             </div>
             <!--------------------------MECZ DODANY----------------------------->
-            <div class="team_2" *ngIf="!match.team_2">
-                <!-- <h3>Brak Teamu 2</h3> -->
-            </div>
+            <!-- <div class="team_2" *ngIf="!match.team_2">
+      
+            </div> -->
             <!---------------------------------------------------------------------->
             <!---------------------------------------------------------------------->
             <!--------------------------TEAMY UTWORZONE----------------------------->
@@ -145,7 +145,7 @@
                 <div class="team_1_champion" *ngIf="match.status == 'Oczekuje na dodanie postaci'">
                     <h3>{{match.team_1!.name}}</h3>
                     <div class="users_list">
-                        <div class="user">
+                        <div class="user mobile_column">
                             <mat-form-field appearance="outline">
                                 <mat-select formControlName="champion1" placeholder="Champion 1">
                                     <mat-option *ngFor="let champion of championsListArray" value={{champion.id}}>{{champion.name}}</mat-option>
@@ -155,7 +155,7 @@
                             <p>{{match.team_1?.users![0].user!.username}}</p>
                         </div>
 
-                        <div class="user">
+                        <div class="user mobile_column">
                             <mat-form-field appearance="outline">
                                 <mat-select formControlName="champion2" placeholder="Champion 2">
                                     <mat-option *ngFor="let champion of championsListArray" value={{champion.id}}>{{champion.name}}</mat-option>
@@ -165,7 +165,7 @@
                             <p>{{match.team_1?.users![1].user!.username}}</p>
                         </div>
 
-                        <div class="user">
+                        <div class="user mobile_column">
                             <mat-form-field appearance="outline">
                                 <mat-select formControlName="champion3" placeholder="Champion 3">
                                     <mat-option *ngFor="let champion of championsListArray" value={{champion.id}}>{{champion.name}}</mat-option>
@@ -184,7 +184,7 @@
                 <div class="team_2_champion" *ngIf="match.status == 'Oczekuje na dodanie postaci'">
                     <h3>{{match.team_2!.name}}</h3>
                     <div class="users_list">
-                        <div class="user">
+                        <div class="user mobile_column_reverse">
                             <p>{{match.team_2?.users![0].user!.username}}</p>
                             <mat-form-field appearance="outline">
                                 <mat-select formControlName="champion4" placeholder="Champion 4">
@@ -194,7 +194,7 @@
                               </mat-form-field>
                         </div>
 
-                        <div class="user">
+                        <div class="user mobile_column_reverse">
                             <p>{{match.team_2?.users![1].user!.username}}</p>
                             <mat-form-field appearance="outline">
                                 <mat-select formControlName="champion5" placeholder="Champion 5">
@@ -204,7 +204,7 @@
                               </mat-form-field>
                         </div>
 
-                        <div class="user">
+                        <div class="user mobile_column_reverse">
                             <p>{{match.team_2?.users![2].user!.username}}</p>
                             <mat-form-field appearance="outline">
                                 <mat-select formControlName="champion6" placeholder="Champion 6">
