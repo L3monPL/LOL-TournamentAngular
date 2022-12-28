@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { UserDataService } from 'src/app/services/global-services/user-data.service';
 import { Champion, Match, MatchRestService } from 'src/app/services/match-rest.service';
 import { User, UserRestService } from 'src/app/services/user-rest.service';
 
@@ -78,7 +79,8 @@ export class MatchListComponent implements OnInit {
 
   constructor(
     private matchRest: MatchRestService,
-    private userRest: UserRestService
+    private userRest: UserRestService,
+    public userData: UserDataService
   ) { }
 
   ngOnInit(): void {

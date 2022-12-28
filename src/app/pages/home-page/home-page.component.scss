@@ -1,3 +1,9 @@
+.page{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
 .container_home{
     display: flex;
     flex-direction: row;
@@ -5,4 +11,20 @@
 }
 .match_list{
     width: 40%;
+    // overflow: auto;
+    // height: calc(100vh - 96px);
+}
+.header{
+    background-color: #BA5DC5;
+    padding: 0.4rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+.header h3{
+    font-size: 1.2rem;
+    margin: 0px;
+    color: #fff;
+    margin-right: 1rem;
 }

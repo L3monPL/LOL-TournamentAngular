@@ -1,7 +1,8 @@
+<div class="add_new_match">
+    <button mat-flat-button (click)="createNewMatch()" color="accent">ROZPOCZNIJ NOWY MECZ</button>
+</div>
+
 <div class="card_container">
-    <div class="add_new_match">
-        <button mat-flat-button (click)="createNewMatch()" color="accent">ROZPOCZNIJ NOWY MECZ</button>
-    </div>
     <div class="card_match_in_progress" *ngFor=" let match of matchListArrayInProgress; let i = index">
         <div class="title">
             <h2>Mecz numer: {{match.id}}</h2>
@@ -225,30 +226,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!------------------------------------------------------------------>
 <!------------------------------------------------------------------>
     <div class="card" *ngFor=" let match of matchListArray; let i = index">
@@ -262,26 +239,32 @@
                 <div class="users_list">
                     <div class="user" *ngFor="let userTeam of match.team_1?.users">
                         <img src={{userTeam!.champion.image}} alt="">
-                        <p>{{userTeam.user![0].username}}</p>
+                        <p *ngIf="match.result == 'TEAM 1'" class="font_green">{{userTeam.user![0].username}}</p>
+                        <p *ngIf="match.result == 'TEAM 2'" class="font_red">{{userTeam.user![0].username}}</p>
                     </div>
                 </div>
             </div>
             <!--------------------------MECZ ZAKOŃCZONY----------------------------->
             <div class="middle_info" *ngIf="match.status == 'Mecz zakończony'">
-              <h1>{{match.result}}</h1>
+                <h2 class="font_green">Zwycięża:</h2>
+                <h1 *ngIf="match.result == 'TEAM 1'">TEAM BLUE</h1>
+                <h1 *ngIf="match.result == 'TEAM 2'">TEAM RED</h1>
             </div>
             <!--------------------------MECZ ZAKOŃCZONY----------------------------->
             <div class="team_2" *ngIf="match.status == 'Mecz zakończony'">
                 <h3>{{match.team_2!.name}}</h3>
                 <div class="users_list">
                     <div class="user side_right" *ngFor="let userTeam of match.team_2?.users">
-                        <p>{{userTeam.user![0].username}}</p>
+                        <p *ngIf="match.result == 'TEAM 1'" class="font_red">{{userTeam.user![0].username}}</p>
+                        <p *ngIf="match.result == 'TEAM 2'" class="font_green">{{userTeam.user![0].username}}</p>
                         <img src={{userTeam!.champion.image}} alt="champion">
                     </div>
                 </div>
             </div>
-<!------------------------------------------------------------------>
-<!------------------------------------------------------------------>
-            
+        </div>
     </div>
 </div>
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+
+

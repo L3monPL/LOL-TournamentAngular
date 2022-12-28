@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { UserDataService } from 'src/app/services/global-services/user-data.service';
 import { UserRestService } from 'src/app/services/user-rest.service';
 
 
@@ -16,7 +17,8 @@ export class HomePageComponent implements OnInit {
 
   constructor(
     private userRest: UserRestService,
-    private router: Router
+    private router: Router,
+    public userData: UserDataService
   ) { }
 
   ngOnInit(): void {
@@ -27,6 +29,7 @@ export class HomePageComponent implements OnInit {
     this.subUserAuth = this.userRest.currentUserAuth().subscribe({
       next: (response) => {
           console.log(response.body)
+          this.userData.setUser(response.body!)
       },
       error: (errorResponse) => {
         switch (errorResponse.status) {
