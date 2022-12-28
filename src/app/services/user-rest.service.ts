@@ -9,6 +9,13 @@ export interface User{
   created_at: string,
 }
 
+export interface CurrentUserStats{
+  id: number,
+  user_id: number,
+  wins: number,
+  lost: number,
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -40,12 +47,15 @@ export class UserRestService {
       withCredentials: true
     })
   }
-
-
-
-
   userList():Observable<HttpResponse<Array<User>>>{
     return this.http.get<Array<User>>(this.PATH + '/user',{
+      observe: 'response',
+      responseType: 'json'
+    })
+  }
+
+  currentUserStats(userId: number):Observable<HttpResponse<CurrentUserStats>>{
+    return this.http.get<CurrentUserStats>(this.PATH + `/stats/currentUser/${userId}`,{
       observe: 'response',
       responseType: 'json'
     })
