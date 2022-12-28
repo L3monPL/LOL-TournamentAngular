@@ -24,7 +24,7 @@ export interface MatchUsers{
   champion: Champion,
   team_id: number,
   created_at: string,
-  user?: Array<MatchUser>
+  user?: MatchUser
 }
 
 export interface MatchUser{
