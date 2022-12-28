@@ -29,8 +29,8 @@ export interface MatchUsers{
 
 export interface MatchUser{
   id: number,
-  username: number,
-  email: number,
+  username: string,
+  email: string,
   created_at: string,
 }
 
