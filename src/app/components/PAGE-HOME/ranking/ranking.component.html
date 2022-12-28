@@ -1,0 +1,15 @@
+<div class="ranking_container">
+    <div class="card_header">
+        <h3>Ranking</h3>
+    </div>
+    <div class="ranking_content">
+        <div *ngFor="let user of this.rankingList; let i = index" class="user_ranking">
+            <p *ngIf="this.userData.user!.username == user.user.username">{{i+1}}. {{user.user.username}} (YOU)</p>
+            <p *ngIf="this.userData.user!.username !== user.user.username">{{i+1}}. {{user.user.username}}</p>
+            <div class="ranking_stats">
+                <p class="font_green">{{user.wins}}</p>
+                <p class="font_red">{{user.lost}}</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -8,11 +8,18 @@
     display: flex;
     flex-direction: row;
     padding: 1rem;
+    column-gap: 0.5rem;
 }
 .match_list{
     width: 45%;
     // overflow: auto;
     // height: calc(100vh - 96px);
+}
+.ranking_and_champions{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
 }
 .header{
     background-color: #BA5DC5;
@@ -27,4 +34,19 @@
     margin: 0px;
     color: #fff;
     margin-right: 1rem;
+}
+
+@media only screen and (max-width: 1000px){
+    .match_list{
+        width: 100%;
+    }
+    .container_home{
+        display: flex;
+        flex-direction: column;
+        row-gap: 0.5rem;
+        overflow: auto;
+    }
+    .ranking_and_champions{
+        width: 100%;
+    }
 }

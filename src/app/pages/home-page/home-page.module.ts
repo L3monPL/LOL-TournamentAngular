@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { HomePageComponent } from './home-page.component';
 import { Routes, RouterModule } from '@angular/router';
 import { MatchListModule } from 'src/app/components/PAGE-HOME/match-list/match-list.module';
+import { RankingModule } from 'src/app/components/PAGE-HOME/ranking/ranking.module';
+import { ChampionsPickedModule } from 'src/app/components/PAGE-HOME/champions-picked/champions-picked.module';
 
 const routes: Routes = [
   {
@@ -18,7 +20,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    MatchListModule
+    MatchListModule,
+    RankingModule,
+    ChampionsPickedModule
   ],
   exports: [
     HomePageComponent

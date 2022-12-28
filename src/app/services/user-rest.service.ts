@@ -16,6 +16,15 @@ export interface CurrentUserStats{
   lost: number,
 }
 
+export interface RankingUsers{
+  id: number,
+  wins: number,
+  lost: number,
+  user: {
+    username: string
+  }
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -56,6 +65,13 @@ export class UserRestService {
 
   currentUserStats(userId: number):Observable<HttpResponse<CurrentUserStats>>{
     return this.http.get<CurrentUserStats>(this.PATH + `/stats/currentUser/${userId}`,{
+      observe: 'response',
+      responseType: 'json'
+    })
+  }
+
+  usersRanking():Observable<HttpResponse<Array<RankingUsers>>>{
+    return this.http.get<Array<RankingUsers>>(this.PATH + `/stats/ranking`,{
       observe: 'response',
       responseType: 'json'
     })
