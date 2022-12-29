@@ -27,8 +27,8 @@
             <!--------------------------OCZEKUJE NA WYNIK----------------------------->
             <div class="team_2" *ngIf="match.status == 'Oczekuje na podanie wyniku'">
                 <h3>{{match.team_2!.name}}</h3>
-                <div class="users_list">
-                    <div class="user side_right" *ngFor="let userTeam of match.team_2?.users">
+                <div class="users_list users_list_mobile">
+                    <div class="user user_mobile side_right" *ngFor="let userTeam of match.team_2?.users">
                         <p>{{userTeam.user!.username}}</p>
                         <img src={{userTeam!.champion.image}} alt="champion">
                     </div>
@@ -255,8 +255,8 @@
             <!--------------------------MECZ ZAKOŃCZONY----------------------------->
             <div class="team_2" *ngIf="match.status == 'Mecz zakończony'">
                 <h3>{{match.team_2!.name}}</h3>
-                <div class="users_list">
-                    <div class="user side_right" *ngFor="let userTeam of match.team_2?.users">
+                <div class="users_list users_list_mobile">
+                    <div class="user user_mobile side_right" *ngFor="let userTeam of match.team_2?.users">
                         <p *ngIf="match.result == 'TEAM 1' && this.userData.user!.username == userTeam.user!.username" class="font_red">{{userTeam.user!.username}}(YOU)</p>
                         <p *ngIf="match.result == 'TEAM 1' && this.userData.user!.username !== userTeam.user!.username" class="font_red">{{userTeam.user!.username}}</p>
                         <p *ngIf="match.result == 'TEAM 2' && this.userData.user!.username == userTeam.user!.username" class="font_green">{{userTeam.user!.username}}(YOU)</p>
