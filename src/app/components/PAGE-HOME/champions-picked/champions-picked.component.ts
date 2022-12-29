@@ -46,17 +46,17 @@ export class ChampionsPickedComponent implements OnInit {
       // console.log(match)
       for (let indexTeam1 = 0; indexTeam1 < match.team_1.length; indexTeam1++) {
         this.team1Arr = match.team_1[indexTeam1].image
-        console.log(this.team1Arr)
+        // console.log(this.team1Arr)
         this.championsArray!.push(this.team1Arr!)
       }
       for (let indexTeam2 = 0; indexTeam2 < match.team_2.length; indexTeam2++) {
         this.team2Arr = match.team_2[indexTeam2].image
-        console.log(this.team2Arr)
+        // console.log(this.team2Arr)
         this.championsArray!.push(this.team2Arr!)
       }
     }
 
-    console.log(this.championsArray!)
+    // console.log(this.championsArray!)
 
   }
   

@@ -30,8 +30,8 @@ export interface RankingUsers{
 })
 export class UserRestService {
 
-  // private PATH = 'https://expressjslol.onrender.com/api'
-  private PATH = 'http://localhost:3030/api'
+  private PATH = 'https://expressjslol.onrender.com/api'
+  // private PATH = 'http://localhost:3030/api'
   
 
   constructor(
@@ -45,7 +45,7 @@ export class UserRestService {
     }, {
       observe: 'response',
       responseType: 'json',
-      withCredentials: true
+      withCredentials: true,
     })
   }
 
