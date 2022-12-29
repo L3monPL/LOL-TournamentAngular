@@ -318,6 +318,10 @@
     }
     .users_list{
         align-items: flex-start;
+        margin-left: 0rem;
+    }
+    .users_list_result_match{
+        // align-items: flex-start;
         margin-left: 2rem;
     }
 }
