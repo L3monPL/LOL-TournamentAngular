@@ -184,7 +184,7 @@
                 <div class="team_2_champion" *ngIf="match.status == 'Oczekuje na dodanie postaci'">
                     <h3>{{match.team_2!.name}}</h3>
                     <div class="users_list">
-                        <div class="user mobile_column_reverse">
+                        <div class="user_col2 mobile_column_reverse">
                             <p>{{match.team_2?.users![0].user!.username}}</p>
                             <mat-form-field appearance="outline">
                                 <mat-select formControlName="champion4" placeholder="Champion 4">
@@ -194,7 +194,7 @@
                               </mat-form-field>
                         </div>
 
-                        <div class="user mobile_column_reverse">
+                        <div class="user_col2 mobile_column_reverse">
                             <p>{{match.team_2?.users![1].user!.username}}</p>
                             <mat-form-field appearance="outline">
                                 <mat-select formControlName="champion5" placeholder="Champion 5">
@@ -204,7 +204,7 @@
                               </mat-form-field>
                         </div>
 
-                        <div class="user mobile_column_reverse">
+                        <div class="user_col2 mobile_column_reverse">
                             <p>{{match.team_2?.users![2].user!.username}}</p>
                             <mat-form-field appearance="outline">
                                 <mat-select formControlName="champion6" placeholder="Champion 6">

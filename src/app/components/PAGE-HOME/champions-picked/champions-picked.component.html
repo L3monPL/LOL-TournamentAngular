@@ -1,8 +1,11 @@
 <div class="card_header">
     <h3>Ostatnio wybierane postacie</h3>
 </div>
-<div class="container_champions_picked">
+<div *ngIf="this.championsPickedListArray?.length !== 0" class="container_champions_picked">
     <div *ngFor="let chmapionsPicked of this.championsArray" class="images_container">
             <img src={{chmapionsPicked}} alt="">
     </div>
+</div>
+<div *ngIf="this.championsPickedListArray?.length === 0" class="container_champions_picked txt_center">
+    <h3>BRAK DANYCH</h3>
 </div>

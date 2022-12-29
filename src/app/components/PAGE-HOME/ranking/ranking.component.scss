@@ -18,7 +18,11 @@
     flex-direction: column;
     height: calc(50vh - 84px);
     background-color: rgb(240, 240, 240);
+    overflow: auto;
 }
+.ranking_content::-webkit-scrollbar {
+    display: none;
+  }
 .user_ranking{
     padding: 0.6rem;
     display: flex;
@@ -40,4 +44,12 @@
 }
 .font_green{
     color: #1eca58;
+}
+.txt_center{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.txt_center h3{
+    margin: 0px;
 }

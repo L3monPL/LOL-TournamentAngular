@@ -32,6 +32,7 @@ export class ChampionsPickedComponent implements OnInit {
       res => {
         this.championsPickedListArray = res
         this.pushChampionToArray()
+        
       },
       error => {}, 
       () => {})
@@ -39,6 +40,7 @@ export class ChampionsPickedComponent implements OnInit {
   }
 
   pushChampionToArray(){
+    this.championsArray = []
     for (let index = 0; index < this.championsPickedListArray!.length; index++) {
       let match = this.championsPickedListArray![index];
       // console.log(match)

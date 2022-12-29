@@ -86,11 +86,27 @@
     flex-direction: row;
     column-gap: 1rem;
     align-items: center;
+    justify-content: flex-start;
+}
+.user_col2{
+    display: flex;
+    flex-direction: row;
+    column-gap: 1rem;
+    align-items: center;
+    justify-content: flex-end;
 }
 .user img{
     width: 60px;
 }
 .user p{
+    margin: 0px;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+.user_col2 img{
+    width: 60px;
+}
+.user_col2 p{
     margin: 0px;
     font-weight: 500;
     font-size: 1.1rem;
@@ -216,6 +232,14 @@
 .mobile_column_reverse{
     display: flex;
     flex-direction: column;
+}
+.user{
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.user_col2{
+    align-items: flex-end;
+    justify-content: flex-end;
 }
 }
 

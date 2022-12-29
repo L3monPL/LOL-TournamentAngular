@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Champion, ChampionRestService } from 'src/app/services/champion-rest.service';
+import { ChampionManagerService } from 'src/app/services/components-service/champion-manager.service';
 import { UserDataService } from 'src/app/services/global-services/user-data.service';
 import { Match, MatchRestService } from 'src/app/services/match-rest.service';
 import { User, UserRestService } from 'src/app/services/user-rest.service';
@@ -82,7 +83,8 @@ export class MatchListComponent implements OnInit {
     private matchRest: MatchRestService,
     private userRest: UserRestService,
     public userData: UserDataService,
-    private championRest: ChampionRestService
+    private championRest: ChampionRestService,
+    private championManager: ChampionManagerService
   ) { }
 
   ngOnInit(): void {
@@ -248,13 +250,13 @@ export class MatchListComponent implements OnInit {
         }
       }
 
-      for (let index = 0; index < 6; index++) {
+      for (let index = 0; index < this.userListArray!.length; index++) {
         let currentUser = this.userListArray!.find(x => x.id === usersId[index])
         console.log(currentUser)
-        if (index < this.userListArray!.length/2) {
-          this.userListByIdTeam1?.push(currentUser!.username)
+        if (index < 3) {
+          this.userListByIdTeam1?.push(currentUser?.username)
         }else{
-          this.userListByIdTeam2!.push(currentUser!.username)
+          this.userListByIdTeam2!.push(currentUser?.username)
         }
         
       }
@@ -418,7 +420,8 @@ export class MatchListComponent implements OnInit {
       next: (response) => {
         this.matchListInProgress()
         this.matchList()
-          this.loadingPutMatchResult = false;
+        this.championManager.getChampionsPickedList()
+        this.loadingPutMatchResult = false;
       },
       error: (errorResponse) => {
         switch (errorResponse.status) {
