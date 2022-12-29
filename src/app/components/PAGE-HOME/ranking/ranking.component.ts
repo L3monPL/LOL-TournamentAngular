@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { RankingManagerService } from 'src/app/services/components-service/ranking-manager.service';
 import { UserDataService } from 'src/app/services/global-services/user-data.service';
 import { RankingUsers, UserRestService } from 'src/app/services/user-rest.service';
 
@@ -10,46 +11,32 @@ import { RankingUsers, UserRestService } from 'src/app/services/user-rest.servic
 })
 export class RankingComponent implements OnInit {
 
-  subRanking?: Subscription
-  loadingRankingList = true
-  customErrorRankingList?: string
+  // subRanking?: Subscription
+  // loadingRankingList = true
+  // customErrorRankingList?: string
   rankingList?: Array<RankingUsers>
 
   constructor(
     private userRest: UserRestService,
-    public userData: UserDataService
+    public userData: UserDataService,
+    private rankingManager: RankingManagerService
   ) { }
 
   ngOnInit(): void {
-    this.getRankingList()
+    this.subscribeRankingList()
+    this.rankingManager.getRankingList()
   }
 
-  getRankingList(){
-    this.subRanking = this.userRest.usersRanking().subscribe({
-      next: (response) => {
-          console.log(response.body)
-          this.rankingList = response.body!
-          this.loadingRankingList = false;
+  subscribeRankingList(){
+    this.rankingManager.serviceRanking.subscribe(
+      res => {
+        this.rankingList = res
       },
-      error: (errorResponse) => {
-        switch (errorResponse.status) {
-          case 400:
-          case 401:
-          case 403:
-            this.customErrorRankingList = errorResponse.error;
-            this.loadingRankingList = false;
-            break;
-        
-          default:
-            this.customErrorRankingList = 'Błąd serwera'
-            this.loadingRankingList = false;
-            break;
-        }
-      },
-      complete: () => {
-        this.loadingRankingList = false;
-      }
-    })
+      error => {}, 
+      () => {})
+
   }
+
+  
 
 }

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Champion, ChampionRestService } from 'src/app/services/champion-rest.service';
 import { ChampionManagerService } from 'src/app/services/components-service/champion-manager.service';
+import { RankingManagerService } from 'src/app/services/components-service/ranking-manager.service';
 import { UserDataService } from 'src/app/services/global-services/user-data.service';
 import { Match, MatchRestService } from 'src/app/services/match-rest.service';
 import { User, UserRestService } from 'src/app/services/user-rest.service';
@@ -84,7 +85,8 @@ export class MatchListComponent implements OnInit {
     private userRest: UserRestService,
     public userData: UserDataService,
     private championRest: ChampionRestService,
-    private championManager: ChampionManagerService
+    private championManager: ChampionManagerService,
+    private rankingManager: RankingManagerService
   ) { }
 
   ngOnInit(): void {
@@ -430,6 +432,7 @@ export class MatchListComponent implements OnInit {
         this.matchListInProgress()
         this.matchList()
         this.championManager.getChampionsPickedList()
+        this.rankingManager.getRankingList()
         this.loadingPutMatchResult = false;
       },
       error: (errorResponse) => {
