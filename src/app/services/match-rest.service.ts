@@ -1,6 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Champion } from './champion-rest.service';
 
 export interface Match{
   id: number,
@@ -34,12 +35,6 @@ export interface MatchUser{
   created_at: string,
 }
 
-export interface Champion{
-  id: number,
-  name: number,
-  image: number,
-  created_at: string,
-}
 
 @Injectable({
   providedIn: 'root'
@@ -97,12 +92,6 @@ export class MatchRestService {
     })
   }
 
-  championsList():Observable<HttpResponse<Array<Champion>>>{
-    return this.http.get<Array<Champion>>(this.PATH + '/champion',{
-      observe: 'response',
-      responseType: 'json'
-    })
-  }
 
   postChampionToUsers(matchId: number, champions_1: Array<number>, champions_2: Array<number>):Observable<HttpResponse<any>>{
     return this.http.post<any>(this.PATH + `/champion/updateChampionsToTeams/${matchId}`,{

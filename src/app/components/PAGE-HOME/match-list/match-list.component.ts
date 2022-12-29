@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { Champion, ChampionRestService } from 'src/app/services/champion-rest.service';
 import { UserDataService } from 'src/app/services/global-services/user-data.service';
-import { Champion, Match, MatchRestService } from 'src/app/services/match-rest.service';
+import { Match, MatchRestService } from 'src/app/services/match-rest.service';
 import { User, UserRestService } from 'src/app/services/user-rest.service';
 
 @Component({
@@ -80,7 +81,8 @@ export class MatchListComponent implements OnInit {
   constructor(
     private matchRest: MatchRestService,
     private userRest: UserRestService,
-    public userData: UserDataService
+    public userData: UserDataService,
+    private championRest: ChampionRestService
   ) { }
 
   ngOnInit(): void {
@@ -335,7 +337,7 @@ export class MatchListComponent implements OnInit {
   }
 
   getChampionsList(){
-    this.subChampions = this.matchRest.championsList().subscribe({
+    this.subChampions = this.championRest.championsList().subscribe({
       next: (response) => {
           this.championsListArray = response.body!
           this.loadingChampions = false;

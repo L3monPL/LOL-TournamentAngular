@@ -1,1 +1,6 @@
-<p>champions-picked works!</p>
+<div class="container_champions_picked">
+    <div *ngFor="let chmapionsPicked of championsPickedListArray" class="images_container">
+        <img src={{championsTeam1.image}} alt="" *ngFor="let championsTeam1 of chmapionsPicked.team_1">
+        <!-- <img src={{championsTeam2.image}} alt="" *ngFor="let championsTeam2 of chmapionsPicked.team_2"> -->
+    </div>
+</div>

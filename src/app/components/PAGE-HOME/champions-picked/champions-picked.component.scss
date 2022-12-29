@@ -1,0 +1,12 @@
+.container_champions_picked{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.images_container{
+    display: flex;
+    flex-direction: row;
+}
+img{
+    width: 65px;
+}
