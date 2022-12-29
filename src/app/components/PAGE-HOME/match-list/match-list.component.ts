@@ -316,6 +316,13 @@ export class MatchListComponent implements OnInit {
       next: (response) => {
         this.matchListInProgress()
           this.loadingAddUsersToMatch = false;
+
+          // this.championForm.get('champion1')?.setValue(null)
+          // this.championForm.get('champion2')?.setValue(null)
+          // this.championForm.get('champion3')?.setValue(null)
+          // this.championForm.get('champion4')?.setValue(null)
+          // this.championForm.get('champion5')?.setValue(null)
+          // this.championForm.get('champion6')?.setValue(null)
       },
       error: (errorResponse) => {
         switch (errorResponse.status) {
@@ -373,9 +380,11 @@ export class MatchListComponent implements OnInit {
     let champion5 = this.championForm.get('champion5')?.value
     let champion6 = this.championForm.get('champion6')?.value
 
-    
-    let champions_team_1 = [Number(champion1), Number(champion2), Number(champion3)]
-    let champions_team_2 = [Number(champion4), Number(champion5), Number(champion6)]
+    let champions_team_1
+    let champions_team_2
+
+    champions_team_1 = [Number(champion1), Number(champion2), Number(champion3)]
+    champions_team_2 = [Number(champion4), Number(champion5), Number(champion6)]
 
     if (this.championForm.valid) {
       this.subPostChampionsToUsers = this.matchRest.postChampionToUsers(matchId, champions_team_1, champions_team_2).subscribe({
