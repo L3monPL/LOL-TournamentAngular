@@ -19,7 +19,7 @@ export class ChampionManagerService {
   ) { }
 
   getChampionsPickedList(){
-    this.subChampionsPicked = this.championRest.championsPickedList(5).subscribe({
+    this.subChampionsPicked = this.championRest.championsPickedList(3).subscribe({
       next: (response) => {
           this.championsPickedListArray = response.body!
           this.loadingChampionsPicked = false;
@@ -45,4 +45,5 @@ export class ChampionManagerService {
       }
     })
   }
+  
 }

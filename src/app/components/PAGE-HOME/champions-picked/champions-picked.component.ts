@@ -10,7 +10,13 @@ import { ChampionManagerService } from 'src/app/services/components-service/cham
 export class ChampionsPickedComponent implements OnInit {
 
   
-  championsPickedListArray?: Array<ChampionPicked>
+  championsPickedListArray?: Array<any>
+
+  championsArray: any = [] 
+
+  team1Arr?: string
+
+  team2Arr?: string
 
   constructor(
     private championManager: ChampionManagerService
@@ -25,9 +31,30 @@ export class ChampionsPickedComponent implements OnInit {
     this.championManager.serviceChampion.subscribe(
       res => {
         this.championsPickedListArray = res
+        this.pushChampionToArray()
       },
       error => {}, 
       () => {})
+
+  }
+
+  pushChampionToArray(){
+    for (let index = 0; index < this.championsPickedListArray!.length; index++) {
+      let match = this.championsPickedListArray![index];
+      // console.log(match)
+      for (let indexTeam1 = 0; indexTeam1 < match.team_1.length; indexTeam1++) {
+        this.team1Arr = match.team_1[indexTeam1].image
+        console.log(this.team1Arr)
+        this.championsArray!.push(this.team1Arr!)
+      }
+      for (let indexTeam2 = 0; indexTeam2 < match.team_2.length; indexTeam2++) {
+        this.team2Arr = match.team_2[indexTeam2].image
+        console.log(this.team2Arr)
+        this.championsArray!.push(this.team2Arr!)
+      }
+    }
+
+    console.log(this.championsArray!)
 
   }
   
